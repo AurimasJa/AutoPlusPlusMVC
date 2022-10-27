@@ -1,0 +1,48 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Registracija";
+}
+@model AutoPlusPlusMVC.Models.User
+
+
+<h1>Registracija</h1>
+
+<form method="post" asp-controller="User" asp-action="RegisterUser">
+
+    <div class ="mb-3">
+        <label for="name" class="form-label" asp-for="name">Vardas</label>
+        <input type="text" class="form-control" id="name" asp-for="name" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="surname" class="form-label" asp-for="surname">Pavardė</label>
+        <input type="text" class="form-control" id="surname" asp-for="surname" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="password" class="form-label" asp-for="password">Slaptažodis</label>
+        <input type="password" class="form-control" id="password" asp-for="password" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="email" class="form-label" asp-for="email">E-Pašto adresas</label>
+        <input type="email" class="form-control" id="email" asp-for="email" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="city" class="form-label" asp-for="city">Miestas </label>
+        <input type="text" class="form-control" id="city" asp-for="city" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="date_of_birth" class="form-label" asp-for="date_of_birth">Gimimo data</label>
+        <input type="date" class="form-control" id="date_of_birth" asp-for="date_of_birth" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="phone_number" class="form-label" asp-for="phone_number">Gimimo data</label>
+        <input type="text" class="form-control" id="phone_number" asp-for="phone_number" required value="+370"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registruotis</button>
+</form>

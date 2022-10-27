@@ -1,0 +1,17 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Paskyra";
+}
+@model AutoPlusPlusMVC.Models.User
+
+
+<h1>Paskyros peržiūra</h1>
+
+<form method="post" asp-controller="User" asp-action="AddBalanceView">
+    <div class ="mb-3">
+        <label>Likutis:</label>
+        <label>$@Model.balance.ToString("N2")</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Pildyti sąskaitą</button>
+</form>

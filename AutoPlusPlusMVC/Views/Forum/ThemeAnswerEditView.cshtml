@@ -1,0 +1,33 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Atsakymo redagavimas";
+}
+@model Forum_answer
+
+<style>
+.styleedit{
+    display: inline-block;
+    min-width:200px;
+    text-align:center;
+}
+</style>
+
+<h1>Atsakymo redagavimas</h1>
+@if (!String.IsNullOrEmpty((String)TempData["ErrorMessage"]))
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>@TempData["ErrorMessage"]</div>
+    </div>
+}
+
+<form method="post" asp-controller="Forum" asp-action="ForumAnswerEdit" asp-route-id="@Model.id_Forum_answer">
+
+    <div class ="mb-3">
+        <label for="vin" class="form-label" asp-for="text">Atsakymo žinutė</label>
+        <input type="text" class="form-control" id="vin" asp-for="text" value=@Model.text>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Redaguoti</button>
+</form>

@@ -1,0 +1,22 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Forumo temos kūrimas";
+}
+@model Forum_topic
+
+<h1>Forumo temos kūrimas</h1>
+
+<form method="post" asp-controller="Forum" asp-action="ForumThemeCreate">
+
+    <div class ="mb-3">
+        <label for="name" class="form-label" asp-for="name">Temos pavadinimas</label>
+        <input type="text" class="form-control" id="name" asp-for="name" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="text" class="form-label" asp-for="text">Temos turinys</label>
+        <input type="text" class="form-control" id="text" asp-for="text" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kurti</button>
+</form>

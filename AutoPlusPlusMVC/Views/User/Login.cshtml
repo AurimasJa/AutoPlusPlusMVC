@@ -1,0 +1,31 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Prisijungimas";
+}
+@model AutoPlusPlusMVC.Models.User
+
+
+<h1>Prisijungimas</h1>
+
+@if (!String.IsNullOrEmpty((String)TempData["ErrorMessage"]))
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>@TempData["ErrorMessage"]</div>
+    </div>
+}
+
+<form method="post" asp-controller="User" asp-action="Login">
+
+    <div class ="mb-3">
+        <label for="email" class="form-label" asp-for="email">E-pašto adresas</label>
+        <input type="email" class="form-control" id="email" asp-for="email" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="password" class="form-label" asp-for="password">Slaptažodis</label>
+        <input type="password" class="form-control" id="password" asp-for="password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Prisijungti</button>
+</form>

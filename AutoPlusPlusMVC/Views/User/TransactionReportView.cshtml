@@ -1,0 +1,24 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Sąskaitos pildymas";
+}
+
+@model AutoPlusPlusMVC.Models.User
+
+
+<h1>Pildymo ataskaita</h1>
+
+<div class="form-group text-center">
+   
+        <h1>Sąskaita sėkmingai papildyta</h1>
+    <h2>Papildytas kiekis: $@Session.recentTransaction.amount.ToString("N2")</h2>
+
+        <form>
+            <button formaction="/Home/Index" class="btn btn-primary">Grįžti</button>
+        </form>
+
+    </div>
+</div>
+@{
+    Session.recentTransaction = null;
+}

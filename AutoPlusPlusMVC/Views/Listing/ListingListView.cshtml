@@ -1,0 +1,67 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Automobilių sąrašas";
+}
+@model IEnumerable<Listing>
+
+
+<h1>Skelbimai</h1>
+
+<style>
+div.listing-item{
+    position:relative;
+    background-color:#AED6E2;
+}
+div.imgpos{
+    min-width:200px;
+    display:inline-block;
+    border:solid 1px grey;
+}
+div.imgpos img{
+    margin:5px;
+    position:relative;
+
+}
+div.textpos{
+    min-width:200px;
+    display:inline-block;
+    position:absolute;
+    border:solid 1px grey;
+}
+div.textpos p{
+    color:darkgreen;
+    margin-left:20px;
+}
+
+
+
+</style>
+
+@foreach(Listing item in Model)
+{
+
+
+    <a asp-controller="Listing" asp-action="ListingView" asp-route-id="@item.id_Listing">
+
+     <body>
+        <div>
+            <div class="listing-item">
+                <div class =imgpos>
+                @*<img src="..\photos\download.jpg" alt="HTML tutorial" style="width:200px;height:150px;">*@
+                @*Viena fotke, directory default css*@
+                <img src="~/css/@item.photos.First().path" alt="HTML tutorial" style="width:200px;height:150px;">
+                </div>
+            <div class="textpos">
+                <p>@item.make</p>
+                <p>@item.model</p>
+                <p>@item.body_type</p>
+                <p>@item.price</p>
+            </div>
+            </div>
+        </div>
+    </body>
+
+</a>
+}
+
+

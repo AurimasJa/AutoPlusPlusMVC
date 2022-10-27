@@ -1,0 +1,196 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Skelbimo kūrimas";
+}
+@model Listing
+@*@model AutoPlusPlusMVC.Models.Listing*@
+<h1>Skelbimo kūrimas</h1>
+
+@if (!String.IsNullOrEmpty((String)TempData["Message"]))
+    {
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"></svg>
+            <div>@TempData["Message"]</div>
+        </div>
+    }
+
+<form method="post" asp-controller="Listing" asp-action="PredictPrice">
+    <button class="btn btn-primary" data-target="#predictionmodal" data-toggle="modal">Prognozuoti kainą</button>
+    <div class="container">
+        <div class="row">
+            <div class="col col-sm-12">
+                <div class="modal" data-backdrop="static" id="predictionmodal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Kainos prognozė</h4>
+                                <button class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class ="mb-3">
+                                        <label for="make" class="form-label" asp-for="make">Markė</label>
+                                        <select id="make" asp-for="make" required>
+                                          <option value="Acura">Acura</option>
+                                          <option value="Audi">Audi</option>
+                                          <option value="BMW">BMW</option>
+                                        </select>
+                                    </div>
+                                    <div class ="mb-3">
+                                        <label for="model" class="form-label" asp-for="model">Modelis </label>
+                                        <input type="text" class="form-control" id="model" asp-for="model" required>
+                                    </div>
+                                    <div class ="mb-3">
+                                        <label for="year" class="form-label" asp-for="year">Pagaminimo data</label>
+                                        <input type="date" class="form-control" id="year" asp-for="year" required/>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Prognozuoti kainą</button>
+                                <button class="btn btn-primary" data-dismiss="modal">Uždaryti</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</form>
+
+<form method="post" asp-controller="Listing" EncType="multipart/form-data" asp-action="CreateListing">
+
+    <div class ="mb-3">
+        <label for="fuel_type" class="form-label" asp-for="fuel_type">Kuro tipas</label>
+        <select id="fuel_type" asp-for="fuel_type" required>
+          <option value="Benzinas">Benzinas</option>
+          <option value="Dyzelis">Dyzelis</option>
+        </select>
+    </div>
+
+
+    <div class ="mb-3">
+        <label for="mileage" class="form-label" asp-for="mileage">Rida</label>
+        <input type="number" class="form-control" id="mileage" min="0" asp-for="mileage" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="vin" class="form-label" asp-for="vin">Kėbulo numeris (VIN)</label>
+        <input type="text" class="form-control" id="vin" asp-for="vin" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="engine_displacement" class="form-label" asp-for="engine_displacement">Darbinis tūris</label>
+        <input type="text" class="form-control" id="engine_displacement" asp-for="engine_displacement" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="model" class="form-label" asp-for="model">Modelis </label>
+        <input type="text" class="form-control" id="model" asp-for="model" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="make" class="form-label" asp-for="make">Markė</label>
+        <select id="make" asp-for="make" required>
+          <option value="Acura">Acura</option>
+          <option value="Audi">Audi</option>
+          <option value="BMW">BMW</option>
+        </select>
+    </div>
+
+    <div class ="mb-3">
+        <label for="number_of_doors" class="form-label" asp-for="number_of_doors">Durų skaičius</label>
+        <input type="number" class="form-control" id="number_of_doors" min="0" asp-for="number_of_doors" required/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="gearbox" class="form-label" asp-for="gearbox">Pavarų dėžė</label>
+        <select id="gearbox" asp-for="gearbox" required>
+          <option value="Automatine">Automatinė</option>
+          <option value="Mechanine">Mechaninė</option>
+        </select>
+    </div>
+
+    <div class ="mb-3">
+        <label for="body_type" class="form-label" asp-for="body_type">Kėbulo tipas</label>
+        <select id="body_type" asp-for="body_type" required>
+          <option value="Sedanas">Sedanas</option>
+          <option value="Universalas">Universalas</option>
+        </select> 
+    </div>
+
+    <div class ="mb-3">
+        <label for="year" class="form-label" asp-for="year">Pagaminimo data</label>
+        <input type="date" class="form-control" id="year" asp-for="year" required/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="price" class="form-label" asp-for="price">Kaina</label>
+        <input type="number" class="form-control" id="price" min="0" asp-for="price" required/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="drive_wheels" class="form-label" asp-for="drive_wheels">Varomieji ratai</label>
+        <select id="drive_wheels" asp-for="drive_wheels" required>
+          <option value="0">Priekiniai</option>
+          <option value="1">Galiniai</option>
+        </select> 
+    </div>
+    <div class ="mb-3">
+        <label for="power" class="form-label" asp-for="power">Galia</label>
+        <input type="text" class="form-control" id="power" asp-for="power" required"/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="color" class="form-label" asp-for="color">Spalva</label>
+        <select id="color" asp-for="color" required>
+          <option value="Juoda">Juoda</option>
+          <option value="Balta">Balta</option>
+        </select> 
+    </div>
+
+    <div class ="mb-3">
+        <label for="number_of_seats" class="form-label" asp-for="number_of_seats">Vietų skaičius</label>
+        <input type="number" class="form-control" id="number_of_seats" min="0" asp-for="number_of_seats" required/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="steering_wheel_position" class="form-label" asp-for="steering_wheel_position">Vairo padėtis</label>
+        <select id="steering_wheel_position" asp-for="steering_wheel_position" required>
+          <option value="Kaireje">Kairėje</option>
+          <option value="Dešinėje">Dešinėje</option>
+        </select> 
+    </div>
+
+    <div class ="mb-3">
+        <label for="first_registration_country" class="form-label" asp-for="first_registration_country">Pirmoji registracijos šalis</label>
+        <input type="text" class="form-control" id="first_registration_country" asp-for="first_registration_country" required/>
+    </div>
+    <div class ="mb-3">
+        <label for="co2_emissions" class="form-label" asp-for="co2_emissions">CO2 emisija</label>
+        <input type="number" class="form-control" id="co2_emissions" min="0" asp-for="co2_emissions" required"/>
+    </div>
+    <div class ="mb-3">
+        <label for="city" class="form-label" asp-for="city">Miestas</label>
+        <input type="text" class="form-control" id="city" asp-for="city" required"/>
+    </div>
+    <div class ="mb-3">
+        <label for="country" class="form-label" asp-for="country">Šalis</label>
+        <input type="text" class="form-control" id="country" asp-for="country" required/>
+    </div>
+    <div class ="mb-3">
+        <label for="phone_number" class="form-label" asp-for="phone_number">Telefonas</label>
+        <input type="text" class="form-control" id="phone_number" asp-for="phone_number" required value="+370"/>
+    </div>
+
+    <div class ="mb-3">
+        <label>Pateikti Nuotrauką</label>
+        <input type="file" class="form-control" id="myFile" name="myFile" asp-for="photos">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sukurti</button>
+
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>

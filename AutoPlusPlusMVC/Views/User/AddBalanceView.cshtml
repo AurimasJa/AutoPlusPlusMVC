@@ -1,0 +1,29 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Sąskaitos pildymas";
+}
+
+@model AutoPlusPlusMVC.Models.User
+
+
+
+<h1>Sąskaitos pildymas</h1>
+
+@if (!String.IsNullOrEmpty((String)TempData["ErrorMessage"]))
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>@TempData["ErrorMessage"]</div>
+    </div>
+}
+
+<form method="post" asp-controller="User" asp-action="SendTransactionData">
+    <div class="form-group text-center">
+
+        <label for="balance" class="form-label" asp-for="balance">Įrašykite sumą</label>
+        <input type="number" class="form-control" min=5 step="0.1" placeholder ="5" id="balance" asp-for="balance" required>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Pildyti</button>
+</form>

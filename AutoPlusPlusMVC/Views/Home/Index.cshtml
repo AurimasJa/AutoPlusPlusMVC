@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if(Session.LoggedInUser != null)
+    {
+        <h1 class="display-4">Sveiki, @Session.LoggedInUser.name</h1>
+    }else{
+        <h1 class="display-4">Sveiki</h1>
+    }
+
+
+    <a asp-controller="Listing" asp-action="ListingListView">
+        <button type="button" class="btn btn-primary">Ieškoti</button>
+    </a>
+    @*<a asp-controller="Listing" asp-action="EditListingView">
+        <button type="button" class="btn btn-primary">Redaguoti</button>
+    </a>*@
+</div>

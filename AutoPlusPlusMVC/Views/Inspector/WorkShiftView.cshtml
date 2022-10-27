@@ -1,0 +1,74 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Inspektoriaus grafikas";
+}
+
+@model MergeInspTimes
+@*@model AutoPlusPlusMVC.Models.Listing*@
+    @if (!String.IsNullOrEmpty((String)TempData["ErrorMessage"]))
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>@TempData["ErrorMessage"]</div>
+    </div>
+}
+
+     <body>
+        <div>
+            <table>
+    <tr>
+        <th>Pradžia</th>
+        <th>Pabaiga</th>
+         </tr>
+            @foreach (var itema in Model.inspector_Times)
+                {    
+                    @foreach (var insp in Model.inspections)
+                    {
+                        @if(itema.interval_start < insp.order_date && itema.interval_end > insp.order_date)
+                        {
+                        <tr><td style="color: red">@itema.interval_start</td>
+                            <td style="color: red">@itema.interval_end</td></tr>
+                        break;
+                    }
+                    else{
+
+                            <tr><td style="color: blue">@itema.interval_start</td>
+                            <td style="color: blue">@itema.interval_end</td></tr>
+                        break;
+                    }
+                    }
+
+                }
+
+                    </tr>
+</table>
+
+        </div>
+    </body>
+
+
+
+<div id="divCheckbox" class="hid">
+
+@using (Html.BeginForm("create", "Inspector", FormMethod.Post))
+{
+    @Html.EditorFor(model => model.inspector.interval_start)
+    @Html.ValidationMessageFor(model => model.inspector.interval_start)
+    @Html.EditorFor(model => model.inspector.interval_end)
+    @Html.ValidationMessageFor(model => model.inspector.interval_end)
+    @Html.EditorFor(model => model.inspector.inspection_price)
+    @Html.ValidationMessageFor(model => model.inspector.inspection_price)
+    <button type="submit">Redaguoti grafiką</button>
+}</div>
+<style>
+.hid{display: none;}
+.button-plus:active{-webkit-filter: brightness(50%);}
+</style>
+<button class="button-plus" id="divEnd" style="border:none;background:none;" type="submit" onclick = "replace()"><img src="https://cdn1.iconfinder.com/data/icons/ui-colored-1/100/UI__2-512.png" width="30" height="30"></button>
+
+<script type = "text/javascript">
+function replace() {
+document.getElementById("divCheckbox").style.display="initial";
+document.getElementById("divEnd").style.display="none";
+}
+</script>

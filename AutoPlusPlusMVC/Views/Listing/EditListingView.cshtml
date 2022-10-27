@@ -1,0 +1,143 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Skelbimo redagavimas";
+}
+@model Listing
+
+<style>
+.styleedit{
+    display: inline-block;
+    min-width:200px;
+    text-align:center;
+}
+</style>
+
+<h1>Skelbimo redagavimas</h1>
+<form method="post" asp-controller="Listing" asp-action="EditListing" asp-route-id="@Model.id_Listing">
+
+    <div class ="mb-3">
+        <label for="fuel_type" class="form-label" asp-for="fuel_type">Kuro tipas</label>
+        <select id="fuel_type" asp-for="fuel_type"  required>
+          <option value="Benzinas">Benzinas</option>
+          <option value="Dyzelis">Dyzelis</option>
+        </select>
+@*        @Html.DropDownListFor(model => model.fuel_type, (IEnumerable<SelectListItem>)ViewBag.fuel_type, new { @class = "form-control" })*@
+    </div>
+
+
+    <div class ="mb-3">
+        <label for="mileage" class="form-label" asp-for="mileage">Rida</label>
+        <input type="number" class="form-control" id="mileage" asp-for="mileage" required value=@Model.mileage>
+    </div>
+
+    <div class ="mb-3">
+        <label for="vin" class="form-label" asp-for="vin">Kėbulo numeris (VIN)</label>
+        <input type="text" class="form-control" id="vin" asp-for="vin" required>
+    </div>
+
+    <div class ="mb-3">
+        <label for="engine_displacement" class="form-label" asp-for="engine_displacement">Darbinis tūris</label>
+        <input type="text" class="form-control" id="engine_displacement" asp-for="engine_displacement" required value=@Model.engine_displacement>
+    </div>
+
+    <div class ="mb-3">
+        <label for="model" class="form-label" asp-for="model">Modelis </label>
+        <input type="text" class="form-control" id="model" asp-for="model" required value=@Model.model>
+    </div>
+
+    <div class ="mb-3">
+        <label for="make" class="form-label" asp-for="make">Markė</label>
+        <select id="make" asp-for="make" required>
+          <option value="Acura">Acura</option>
+          <option value="Audi">Audi</option>
+        </select>
+    </div>
+
+    <div class ="mb-3">
+        <label for="number_of_doors" class="form-label" asp-for="number_of_doors">Durų skaičius</label>
+        <input type="number" class="form-control" id="number_of_doors" asp-for="number_of_doors" required value=@Model.number_of_doors/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="gearbox" class="form-label" asp-for="gearbox">Pavarų dėžė</label>
+        <select id="gearbox" asp-for="gearbox" required>
+          <option value="Automatine">Automatinė</option>
+          <option value="Mechanine">Mechaninė</option>
+        </select>
+    </div>
+
+    <div class ="mb-3">
+        <label for="body_type" class="form-label" asp-for="body_type">Kėbulo tipas</label>
+        <select id="body_type" asp-for="body_type" required>
+          <option value="Sedanas">Sedanas</option>
+          <option value="Universalas">Universalas</option>
+        </select> 
+    </div>
+
+    <div class ="mb-3">
+        <label for="year" class="form-label" asp-for="year">Pagaminimo data</label>
+        <input type="date" class="form-control" id="year" asp-for="year" required value=@Model.year/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="price" class="form-label" asp-for="price">Kaina</label>
+        <input type="number" class="form-control" id="price" asp-for="price" required value=@Model.price/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="drive_wheels" class="form-label" asp-for="drive_wheels">Varomieji ratai</label>
+        <select id="drive_wheels" asp-for="drive_wheels" required>
+          <option value="0">Priekiniai</option>
+          <option value="1">Galiniai</option>
+        </select> 
+    </div>
+    <div class ="mb-3">
+        <label for="power" class="form-label" asp-for="power">Galia</label>
+        <input type="text" class="form-control" id="power" asp-for="power" required value=@Model.power/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="color" class="form-label" asp-for="color">Spalva</label>
+        <select id="color" asp-for="color" required>
+          <option value="Juoda">Juoda</option>
+          <option value="Balta">Balta</option>
+        </select> 
+    </div>
+
+    <div class ="mb-3">
+        <label for="number_of_seats" class="form-label" asp-for="number_of_seats">Vietų skaičius</label>
+        <input type="number" class="form-control" id="number_of_seats" asp-for="number_of_seats" required value=@Model.number_of_seats/>
+    </div>
+
+    <div class ="mb-3">
+        <label for="steering_wheel_position" class="form-label" asp-for="steering_wheel_position">Vairo padėtis</label>
+        <select id="steering_wheel_position" asp-for="steering_wheel_position" required>
+          <option value="Kaireje">Kairėje</option>
+          <option value="Dešinėje">Dešinėje</option>
+        </select> 
+    </div>
+
+    <div class ="mb-3">
+        <label for="first_registration_country" class="form-label" asp-for="first_registration_country">Pirmoji registracijos šalis</label>
+        <input type="text" class="form-control" id="first_registration_country" asp-for="first_registration_country" required value=@Model.first_registration_country/>
+    </div>
+    <div class ="mb-3">
+        <label for="co2_emissions" class="form-label" asp-for="co2_emissions">CO2 emisija</label>
+        <input type="number" class="form-control" id="co2_emissions" asp-for="co2_emissions" required value=@Model.co2_emissions/>
+    </div>
+    <div class ="mb-3">
+        <label for="city" class="form-label" asp-for="city">Miestas</label>
+        <input type="text" class="form-control" id="city" asp-for="city" required value=@Model.city/>
+    </div>
+    <div class ="mb-3">
+        <label for="country" class="form-label" asp-for="country">Šalis</label>
+        <input type="text" class="form-control" id="country" asp-for="country" required value=@Model.country/>
+    </div>
+    <div class ="mb-3">
+        <label for="phone_number" class="form-label" asp-for="phone_number">Telefonas</label>
+        <input type="text" class="form-control" id="phone_number" asp-for="phone_number" required value=@Model.phone_number/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sukurti</button>
+</form>
+

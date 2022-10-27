@@ -1,0 +1,152 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Forumo tema";
+}
+@model MergeRemembForumTop
+
+<h1>Tema</h1>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+.styleone{
+    display: inline-block;
+    background-color: cyan;
+
+}
+
+div.textpos{
+    min-width:200px;
+    display:inline-block;
+    position:relative;
+    border:solid 1px grey;
+    margin: 5px;
+}
+div.textpos p{
+    color:darkgreen;
+    margin-left:20px;
+}
+
+</style>
+
+@if (!String.IsNullOrEmpty((String)TempData["ErrorMessage"]))
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>@TempData["ErrorMessage"]</div>
+    </div>
+}
+
+@if (!String.IsNullOrEmpty((String)TempData["SuccessMessage"]))
+{
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+        <div>@TempData["SuccessMessage"]</div>
+    </div>
+}
+          
+<div class="styleone">
+    <div>Data</div>
+    <div>Pavadinimas</div>
+    <div>Info</div>
+</div>
+<div class="styleone">
+    <div>@Model.forum_Topic.creation_date</div>
+    <div>@Model.forum_Topic.name</div>
+    <div>@Model.forum_Topic.text</div>
+</div>
+@if (Session.LoggedInUser != null && Session.LoggedInUser.id_User == Model.forum_Topic.fk_User.id_User)
+{
+    @if(Model.forum_Topic.bumped != 1)
+    {
+        <form method="post" asp-controller="Forum" asp-action="BumpTopic" asp-route-ID="@Model.forum_Topic.id_Forum_topic">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                    <input type="submit" value="Iškelti temą. $4.99" class="btn btn-primary" />
+                </div>
+            </div>
+        </form> 
+    }
+    @if (Session.LoggedInUser != null)
+    {
+        @if(Model.forum_Topic_Remembrances == null){
+                <form method="post" asp-controller="Forum" asp-action="RememberTopic" asp-route-ID="@Model.forum_Topic.id_Forum_topic">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                <input type="submit" value="Įsiminti" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+        }
+
+    }
+
+    <div class="form-group">
+        <a asp-controller="Forum" asp-action="ForumThemeEditView" asp-route-id="@Model.forum_Topic.id_Forum_topic">
+            <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                <input type="submit" value="Redaguoti" class="btn btn-success" />
+            </div>
+        </a>
+    </div>
+
+    @*SALINTI TEMA IS TO PACIO PUSLAPIO!*@
+    <form method="post" asp-controller="Forum" asp-action="ForumThemeDeleteView" asp-route-id="@Model.forum_Topic.id_Forum_topic">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                <input type="submit" value="Šalinti" class="btn btn-danger" />
+            </div>
+        </div>
+    </form>
+}
+
+@{
+    Session.Lmao = Model.forum_Topic;   
+
+}
+
+@foreach(var item in Model.forum_Topic.answers)
+{
+     <body>
+        <div>
+            <div class="textpos">
+                <p>@item.date</p>
+                <p>@item.fk_User.name</p>
+                <p>@item.text</p>
+                @if(Session.LoggedInUser != null && item.fk_User.id_User == Session.LoggedInUser.id_User)
+                {
+                    <a asp-controller="Forum" asp-action="ThemeAnswerEditView" asp-route-id="@item.id_Forum_answer">
+                        <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                            <input type="submit" value="Redaguoti" class="btn btn-success" />
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </body>
+}
+
+@if(Session.LoggedInUser != null)
+{
+    <div id="divCheckbox" class="hid">
+
+    @using (Html.BeginForm("AcceptAnswer", "Forum", FormMethod.Post))
+    {
+        @Html.EditorFor(model => model.forum_Answer.text)
+        @Html.ValidationMessageFor(model => model.forum_Answer)
+        <button class="btn btn-primary" type="submit">Atsakyti</button>
+    }</div>
+    <style>
+        .hid{display: none; min-width: 200px; min-height: 200px;}
+        .button-plus:active{-webkit-filter: brightness(50%);}
+    </style>
+        <button id="divEnd" class="btn btn-primary" type="submit" onclick = "replace()">Atsakyti</button>
+
+    <script type = "text/javascript">
+        function replace() {
+        document.getElementById("divCheckbox").style.display="initial";
+        document.getElementById("divEnd").style.display="none";
+        }
+    </script>
+}

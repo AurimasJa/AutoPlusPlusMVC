@@ -1,0 +1,115 @@
+﻿@using AutoPlusPlusMVC.Models
+@{
+    ViewData["Title"] = "Automobilių sąrašas";
+}
+@model MergePhotosListings
+
+@*@model IEnumerable<Listing>*@
+
+<h1>Pasirinktas skelbimas</h1>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+.styleone{
+    display: inline-block;
+    background-color: cyan;
+
+}
+</style>
+
+@if (!String.IsNullOrEmpty((String)TempData["SuccessMessage"]))
+{
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+        <div>@TempData["SuccessMessage"]</div>
+    </div>
+}
+          
+<div class="styleone">
+    <div>Klasė</div>
+    <div>Modelis</div>
+    <div>Pagaminimo data</div>
+    <div>Skelbimo sukūrimo data</div>
+    <div>Kaina</div>
+    <div>Tipas</div>
+    <div>Rida</div>
+    <div>VIN KODAS</div>
+    <div>Darbinis tūris</div>
+    <div>Durų skaičius</div>
+    <div>Varomieji ratai</div>
+    <div>Kuro tipas</div>
+    <div>Pavarų dėžė</div>
+    <div>Galia</div>
+    <div>Spalva</div>
+    <div>Vietų skaičius</div>
+    <div>Vairo padėtis</div>
+    <div>Pirmoji registracijos šalis</div>
+    <div>CO2 emisija</div>
+    <div>Miestas</div>
+    <div>Telefonas</div>
+</div>
+<div class="styleone">
+    <div>@Model.listing.make</div>
+    <div>@Model.listing.model</div>
+    <div>@Model.listing.year</div>
+    <div>@Model.listing.listing_creation_date</div>
+    <div>@Model.listing.price</div>
+    <div>@Model.listing.body_type</div>
+    <div>@Model.listing.mileage</div>
+    <div>@Model.listing.vin</div>
+    <div>@Model.listing.engine_displacement</div>
+    <div>@Model.listing.number_of_doors</div>
+    <div>@Model.listing.drive_wheels</div>
+    <div>@Model.listing.fuel_type</div>
+    <div>@Model.listing.gearbox</div>
+    <div>@Model.listing.power</div>
+    <div>@Model.listing.color</div>
+    <div>@Model.listing.number_of_seats</div>
+    <div>@Model.listing.steering_wheel_position</div>
+    <div>@Model.listing.first_registration_country</div>
+    <div>@Model.listing.co2_emissions</div>
+    <div>@Model.listing.city</div>
+    <div>@Model.listing.phone_number</div>
+</div>
+
+
+    @if(Session.LoggedInUser != null && Model.listing.remembrances.Where(x => x.User.id_User == Session.LoggedInUser.id_User).Count() <= 0)
+    {
+        <form method="post" asp-controller="Listing" asp-action="RememberListing" asp-route-ID="@Model.listing.id_Listing">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                    <input type="submit" value="Įsiminti" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    }
+
+
+    <div class="styleone">
+        <a asp-controller="Listing" asp-action="ListingView" asp-route-id="@Model.listing.id_Listing">
+            <img src="~/css/@Model.photos.First().path" />
+        </a>
+    </div>
+
+@if (Session.LoggedInUser != null && Model.listing.fk_Userid_User == Session.LoggedInUser.id_User)
+{
+    <div class="form-group">
+        <a asp-controller="Listing" asp-action="EditListingView" asp-route-id="@Model.listing.id_Listing">
+            <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                <input type="submit" value="Redaguoti" class="btn btn-success" />
+            </div>
+        </a>
+    </div>
+
+    <form method="post" asp-controller="Listing" asp-action="DeleteListingView" asp-route-ID="@Model.listing.id_Listing">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-top:10px; margin-bottom:10px">
+                <input type="submit" value="Šalinti" class="btn btn-danger" />
+            </div>
+        </div>
+    </form>
+
+}

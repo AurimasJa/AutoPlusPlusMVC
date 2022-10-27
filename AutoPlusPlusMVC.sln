@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPlusPlusMVC", "AutoPlusPlusMVC\AutoPlusPlusMVC.csproj", "{4A416804-58D4-42B5-A3BC-8965D1E78799}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A416804-58D4-42B5-A3BC-8965D1E78799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A416804-58D4-42B5-A3BC-8965D1E78799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A416804-58D4-42B5-A3BC-8965D1E78799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A416804-58D4-42B5-A3BC-8965D1E78799}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2182D9B1-0963-427D-8C22-1D43313C9124}
+	EndGlobalSection
+EndGlobal
